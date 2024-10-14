@@ -1,0 +1,14 @@
+cans_defect_detection_dataset/damaged/*
+cans_defect_detection_dataset/intact/*
+!cans_defect_detection_dataset/damaged/.gitkeep
+!cans_defect_detection_dataset/intact/.gitkeep
+cans_defect_detection_dataset_original/*
+!cans_defect_detection_dataset_original/.gitkeep
+confusion_matrix.png
+confusion_matrix_v4.png
+datasets/
+
+notebook_training.ipynb
+pre_trained/
+results/
+unseen_test_set/
