@@ -4,7 +4,7 @@ import json
 import os
 
 # Load CSV file
-csv_path = 'cans_defect_detection_dataset/jarlids_annots.csv'  # Update with your actual path
+csv_path = 'cans_defect_detection_dataset_original/jarlids_annots.csv'  
 df = pd.read_csv(csv_path)
 
 # Create output directories if they don't exist
@@ -16,7 +16,7 @@ os.makedirs(damaged_dir, exist_ok=True)
 
 # Iterate through the CSV rows
 for index, row in df.iterrows():
-    img_path = f"cans_defect_detection_dataset/{row['filename']}"  # Image path
+    img_path = f"cans_defect_detection_dataset_original/{row['filename']}"  # Image path
     image = cv2.imread(img_path)  # Read the image
     
     if image is None:

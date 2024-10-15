@@ -1,8 +1,7 @@
 import argparse
 from anomalib.models import Patchcore, Padim, EfficientAd, ReverseDistillation
 from anomalib.engine import Engine
-# from anomalib.data.image.folder import Folder, FolderDataset
-from anomalib.data import Folder, MVTec
+from anomalib.data import Folder
 from anomalib import TaskType
 from pathlib import Path
 import matplotlib.pyplot as plt

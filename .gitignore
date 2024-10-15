@@ -7,8 +7,9 @@ cans_defect_detection_dataset_original/*
 confusion_matrix.png
 confusion_matrix_v4.png
 datasets/
-
+visualize_data.py
 notebook_training.ipynb
 pre_trained/
 results/
 unseen_test_set/
+*.JPG
