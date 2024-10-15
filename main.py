@@ -15,9 +15,6 @@ def train(folder_datamodule, model):
 def test(model, folder_datamodule, ckpt_path):
     # Computes AUROC and F1-Score measures
     engine.test(model=model, datamodule=folder_datamodule, ckpt_path=ckpt_path)
-
-
-def predict(model, folder_datamodule, ckpt_path):
     # Performs prediction on the test set
     prediction_results = engine.predict(model=model,
                                     dataloaders=folder_datamodule.test_dataloader(), return_predictions=True, ckpt_path=ckpt_path)
@@ -65,7 +62,8 @@ if __name__ == "__main__":
         abnormal_dir="damaged",
         task=TaskType.CLASSIFICATION,
         image_size=(256, 256),
-        num_workers=6,                     
+        num_workers=6,      
+        seed=42,               
     )
     folder_datamodule.setup()
 
@@ -75,11 +73,8 @@ if __name__ == "__main__":
         train(folder_datamodule, model) # The training generates a checkpoint file that is useful for the next two steps.
     elif args.mode == 'test': # computes evaluation metrics on the test set, also generates the predictions in the results folder.
         print("Testing the model...")
-        ckpt_path = '' # Put with your checkpoint path, for example: ckpt_path= 'results/Padim/cans_defect_detection/v1/weights/lightning/model.ckpt'
-        test(model, folder_datamodule, ckpt_path)
-    elif args.mode == 'predict': # Predicts on the test set and computes confusion matrix
-        ckpt_path = '' # change with your checkpoint path, for example: ckpt_path= 'results/Padim/cans_defect_detection/v1/weights/lightning/model.ckpt'
-        prediction_results = predict(model, folder_datamodule, ckpt_path)
+        ckpt_path = '' # Replace with your checkpoint path, for example: ckpt_path= 'results/Padim/cans_defect_detection/v1/weights/lightning/model.ckpt'
+        prediction_results = test(model, folder_datamodule, ckpt_path)
         plot_confusion_matrix(prediction_results)
 
 
