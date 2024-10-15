@@ -58,23 +58,20 @@ You can train an Anomalib model on this dataset using:
 ```bash
 python main.py --mode train
 ```
-By default, you'll train the data on 'Padim' model, however you can train on other models such as Patchcore, ReverseDistillation... Check the official documentation of Anomalib for the supported models (https://github.com/openvinotoolkit/anomalib/tree/main/src/anomalib/models/image). The training time might vary depending on your hardware, the model chosen, the number of epoch (and of course the size of the data). For some models, you can interrupt the training after some epochs with ctrl+C. 
+By default, you'll train the data on 'Padim' model, however you can train on other models such as Patchcore, ReverseDistillation... Check the official documentation of Anomalib for the supported models (https://github.com/openvinotoolkit/anomalib/tree/main/src/anomalib/models/image). 
 
-After training, and before testing, you should get a checkpoint file located under results/<model name>/cans_defect_detection/<v_some_number>/weights/lightning/model.ckpt, copy that path and assign it to the variable ckpt_path in the code. Once that is done you can test the model on the test set:
+The training time might vary depending on your hardware, the model chosen, the number of epochs (and of course the size of the data). For some models, you can interrupt the training after some epochs with ctrl+C. 
+
+What happens in the training is that Anomalib will automatically split the data into training (80% of intact data), validation and test sets, then perform training on the training set.
+
+After training, and before you test, you should get a checkpoint file located under `results/<model name>/cans_defect_detection/<v_some_number>/weights/lightning/model.ckpt`, copy that path and assign it to the variable ckpt_path in the code. Once that is done you can test the model on the test set:
 ```bash
 python main.py --mode test
 ```
-This will output the evaluation metrics such as AUROC and F1Score and also a confusion matrix which will be generated and saved in the same path as the python files. Additionally, you can find the anomaly detection results on the test set under the path results/<model name>/cans_defect_detection/<v_some_number>/images/cans_defect_detection_dataset/.
+This will output the evaluation metrics such as AUROC and F1 Score, and it will also generate a confusion matrix, which will be saved in the same directory as the Python files. Additionally, you can find the anomaly detection results on the test set under the path `results/<model_name>/cans_defect_detection/<v_some_number>/images/cans_defect_detection_dataset/`.
 
+Some examples of the results:
 
+![confusion_matrix](https://github.com/user-attachments/assets/2297c925-be43-4c5b-b7c4-5ced3eb47534)
 
-
-
-
-
-
-
-
-
-## Provided code
-
+![p19_bbox_166_1](https://github.com/user-attachments/assets/57dbe0b6-a9ab-4787-bc18-b3d871936e32)
