@@ -72,6 +72,6 @@ This will output the evaluation metrics such as AUROC and F1 Score, and it will 
 
 Some examples of the results:
 
-![confusion_matrix](https://github.com/user-attachments/assets/2297c925-be43-4c5b-b7c4-5ced3eb47534)
+![confusion_matrix](https://github.com/user-attachments/assets/f1fdfa65-2b3d-4eb6-a467-83d6bf319494)
 
 ![p19_bbox_166_1](https://github.com/user-attachments/assets/57dbe0b6-a9ab-4787-bc18-b3d871936e32)
