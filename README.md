@@ -20,3 +20,61 @@ I use this annotation file to:
 This is necessary because Anomalib accepts data only in this format.
 
 ![data_rearranged](https://github.com/user-attachments/assets/c9c4e11e-6d98-40c1-9bbd-55825a0b5f7a)
+
+## Setup 
+1. Create a conda environment and install Anomalib.
+```bash
+conda create --name my_anomalib_env python=3.10
+conda activate my_anomalib_env
+pip install anomalib
+anomalib install -v
+```
+Anomalib could also be installed from its original github repo for more flexibilty, further details on its installation are found in https://github.com/openvinotoolkit/anomalib.
+
+Note: at the time of development of this project, Anomalib had the version v1.1.1.
+
+If you have a GPU and want to use it for the training, make sure that it's correctly connected.
+
+```python
+import torch
+print(torch.cuda.is_available) # you should get True, if you get False then reinstall a compatible torch version.
+```
+
+2. Download the dataset from Kaggle https://www.kaggle.com/datasets/rrighart/jarlids and extract it under the folder cans_defect_detection_dataset_original.
+
+Optionally, you can use the script *visualize_data.py* to view the bounding boxes on the images.
+```bash
+python visualize_data.py
+```
+
+3. Use the script *rearrange_data.py* to prepare the data according to the process described in data preparation section.
+```bash
+python rearrange_data.py
+```
+Now you should have intact jar lid images under *cans_defect_detection/intact* and those with defects under *cans_defect_detection/damaged*.
+
+## Training and testing
+You can train an Anomalib model on this dataset using:
+```bash
+python main.py --mode train
+```
+By default, you'll train the data on 'Padim' model, however you can train on other models such as Patchcore, ReverseDistillation... Check the official documentation of Anomalib for the supported models (https://github.com/openvinotoolkit/anomalib/tree/main/src/anomalib/models/image). The training time might vary depending on your hardware, the model chosen, the number of epoch (and of course the size of the data). For some models, you can interrupt the training after some epochs with ctrl+C. 
+
+After training, and before testing, you should get a checkpoint file located under results/<model name>/cans_defect_detection/<v_some_number>/weights/lightning/model.ckpt, copy that path and assign it to the variable ckpt_path in the code. Once that is done you can test the model on the test set:
+```bash
+python main.py --mode test
+```
+This will output the evaluation metrics such as AUROC and F1Score and also a confusion matrix which will be generated and saved in the same path as the python files. Additionally, you can find the anomaly detection results on the test set under the path results/<model name>/cans_defect_detection/<v_some_number>/images/cans_defect_detection_dataset/.
+
+
+
+
+
+
+
+
+
+
+
+## Provided code
+
