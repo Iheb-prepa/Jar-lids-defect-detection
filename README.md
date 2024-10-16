@@ -22,6 +22,7 @@ This is necessary because Anomalib accepts data only in this format.
 ![data_rearranged](https://github.com/user-attachments/assets/c9c4e11e-6d98-40c1-9bbd-55825a0b5f7a)
 
 ## Setup 
+It's highly recommended to run this code on a linux-based machine or WSL.
 1. Create a conda environment and install Anomalib.
 ```bash
 conda create --name my_anomalib_env python=3.10
